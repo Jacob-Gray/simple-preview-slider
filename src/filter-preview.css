@@ -1,8 +1,13 @@
+body, html {
+	margin: 0;
+	height: 100%;
+}
+
 .filter-preview {
 	width: 100%;
 	height: 300px;
 	position: relative;
-	background: red;
+	background: #222021;
 }
 
 .filter-preview .image-wrapper {
@@ -10,19 +15,21 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	background: blue;
+	background: #333;
 	width: 50%;
-	filter: sepia(.8);
 }
 
 .filter-preview, .filter-preview .image-wrapper {
-	background-position: top left;
+	background-position: center left;
 	background-size: cover;
 }
 
 .filter-preview .image-wrapper .filter-slider {
 	position: absolute;
-	background: linear-gradient(to left, transparent 20%, rgba(0, 0, 0, 0.2) 40%, white 41%, white 59%, rgba(0, 0, 0, 0.2) 60%, transparent 80%);
+	background: -webkit-gradient(linear, right top, left top, color-stop(40%, transparent), color-stop(41%, white), color-stop(59%, white), color-stop(60%, transparent));
+	background: -webkit-linear-gradient(right, transparent 40%, white 41%, white 59%, transparent 60%);
+	background: -o-linear-gradient(right, transparent 40%, white 41%, white 59%, transparent 60%);
+	background: linear-gradient(to left, transparent 40%, white 41%, white 59%, transparent 60%);
 	right: -10px;
 	top: 0;
 	width: 20px;

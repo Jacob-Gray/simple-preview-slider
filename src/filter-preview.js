@@ -38,7 +38,7 @@
 				newWidth = w($wrapper) - (startX - event.pageX);
 
 			if (newWidth > 50 && displayWidth - newWidth > 50) {
-				$wrapper.style.width = newWidth;
+				$wrapper.style.width = newWidth + 'px';
 				startX = event.pageX;
 
 			}
