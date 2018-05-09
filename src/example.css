@@ -11,3 +11,9 @@ iframe {
     height: 300px;
     width: 100%;
 }
+
+pre {
+    background: #f6f6f6;
+    border-radius: 2px;
+    color: #cb35b4
+}
