@@ -21,7 +21,7 @@
 	 * Make sure the two element backgrounds overlap perfectly
 	 */
 	function positionWrapperBackground() {
-		$wrapper.style.backgroundSize = w($el) + 'px';
+		$wrapper.style.backgroundSize = 'auto ' + w($el) + 'px';
 	}
 
 	window.addEventListener('resize', positionWrapperBackground);
@@ -38,7 +38,7 @@
 				newWidth = w($wrapper) - (startX - event.pageX);
 
 			if (newWidth > 50 && displayWidth - newWidth > 50) {
-				$wrapper.style.width = newWidth;
+				$wrapper.style.width = newWidth + 'px';
 				startX = event.pageX;
 
 			}
