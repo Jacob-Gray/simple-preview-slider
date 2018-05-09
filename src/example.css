@@ -15,5 +15,18 @@ iframe {
 pre {
     background: #f6f6f6;
     border-radius: 2px;
-    color: #cb35b4
+    color: #cb35b4;
+    padding: 10px 20px;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #3581cb;
+}
+
+a:hover{
+    text-decoration: underline;
 }
