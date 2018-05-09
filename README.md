@@ -1,1 +1,0 @@
-# Simple filter preview slider
