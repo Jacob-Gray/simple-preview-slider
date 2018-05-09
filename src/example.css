@@ -9,4 +9,5 @@ iframe {
     display: block;
     border: none;
     height: 300px;
+    width: 100%;
 }
