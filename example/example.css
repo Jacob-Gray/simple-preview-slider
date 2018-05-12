@@ -2,7 +2,8 @@ main {
 	max-width: 1200px;
 	margin: auto;
 	color: #333;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Raleway', sans-serif;
+	padding: 40px 20px;
 }
 
 iframe {
@@ -10,6 +11,13 @@ iframe {
 	border: none;
 	height: 300px;
 	width: 100%;
+}
+
+h2 {
+	color: #3c81ce;
+	padding: 20px 0;
+	font-size: 2em;
+	font-family: 'Playfair Display', serif;
 }
 
 pre {
@@ -37,4 +45,15 @@ b {
 	padding: 3px 5px;
 	border-radius: 2px;
 	margin: 0 4px;
+}
+
+.resize {
+	overflow: hidden;
+	resize: both;
+	max-width: 100%;
+	max-height: 500px;
+}
+
+.resize iframe {
+	height: 100%;
 }
