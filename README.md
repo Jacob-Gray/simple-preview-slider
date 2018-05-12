@@ -1,4 +1,4 @@
-<img src="https://jacob-gray.github.io/simple-preview-slider/src/header.png">
+<img src="https://jacob-gray.github.io/simple-preview-slider/example/header.png">
 
 ## Simple preview slider
 
