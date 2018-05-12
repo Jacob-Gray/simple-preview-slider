@@ -39,10 +39,10 @@
 
             currentWidth = w($wrapper) - (startX - event.pageX);
 
-            if (currentWidth <= 3) {
+            if (currentWidth <= 2) {
 
                 $slider.classList.add('grow-right');
-            } else if (displayWidth - currentWidth <= 3) {
+            } else if (displayWidth - currentWidth <= 2) {
 
                 $slider.classList.add('grow-left');
             } else {
