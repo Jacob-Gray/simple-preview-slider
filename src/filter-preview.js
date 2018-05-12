@@ -11,22 +11,13 @@
 	 * Initialize global vars
 	 */
     var dragging = false,
-        currentWidth,
-        startX;
+        direction,
+        prevX,
+        startingOffset = 0;
 
     function w(el) {
         return parseInt(getComputedStyle(el).width);
     }
-
-	/**
-	 * Make sure the two element backgrounds overlap perfectly
-	 */
-    function positionWrapperBackground() {
-        $wrapper.style.backgroundSize = w($el) + 'px';
-    }
-
-    window.addEventListener('resize', positionWrapperBackground);
-    positionWrapperBackground();
 
 	/**
 	 * Handle resize
@@ -35,30 +26,49 @@
 
         if (dragging) {
 
-            var displayWidth = w($el);
+            var displayWidth = w($el),
+                travelled = prevX - event.pageX;
 
-            currentWidth = w($wrapper) - (startX - event.pageX);
+            if (prevX > event.pageX) {
 
-            if (currentWidth <= 2) {
+                if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
+                else startingOffset = 0;
+
+                direction = 'left';
+            } else if (prevX < event.pageX) {
+
+                if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
+                else startingOffset = 0;
+
+                direction = 'right';
+            }
+
+            var currentX = event.pageX + startingOffset;
+
+            if (currentX <= 2) {
 
                 $slider.classList.add('grow-right');
-            } else if (displayWidth - currentWidth <= 2) {
+                $wrapper.style.width = '2px';
+            } else if (displayWidth - currentX <= 2) {
 
                 $slider.classList.add('grow-left');
+                $wrapper.style.width = displayWidth - 2 + 'px';
             } else {
 
                 $slider.className = 'filter-slider'
 
-                $wrapper.style.width = (currentWidth / displayWidth) * 100 + '%';
-                startX = event.pageX;
+                $wrapper.style.width = (currentX / displayWidth) * 100 + '%';
             }
+
+            prevX = event.pageX;
         }
     });
 
     $slider.addEventListener('mousedown', function (event) {
 
         dragging = true;
-        startX = event.pageX;
+        startingOffset = w($wrapper) - event.pageX;
+        prevX = event.pageX;
     });
 
     window.addEventListener('mouseup', function () {
@@ -66,25 +76,23 @@
         dragging = false;
     });
 
-    window.addEventListener('mouseout', function () {
+    document.addEventListener('mouseout', function (event) {
 
-        if(dragging) {
+        if (dragging && !event.toElement && !event.relatedTarget) {
 
             var displayWidth = w($el);
 
-            if(currentWidth < 40) {
+            if (direction === 'left') {
 
                 $slider.classList.add('grow-right');
-                $wrapper.style.width = '3px';
+                $wrapper.style.width = '2px';
             }
 
-            if(displayWidth - currentWidth <= 40) {
+            if (direction === 'right') {
 
                 $slider.classList.add('grow-left');
-                $wrapper.style.width = displayWidth - 3 + 'px';
+                $wrapper.style.width = displayWidth - 2 + 'px';
             }
         }
-
-        console.log('mouse left');
     });
 })();
