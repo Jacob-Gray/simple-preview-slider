@@ -1,26 +1,29 @@
-var example = document.querySelector('iframe').contentDocument,
-    before = example.querySelector('.image-wrapper'),
-    after = example.querySelector('.filter-preview');
+document.querySelector('iframe').onload = function () {
 
-/**
- * Get url things in da pre
- */
+    var example = document.querySelector('iframe').contentDocument,
+        before = example.querySelector('.image-wrapper'),
+        after = example.querySelector('.filter-preview');
 
-function handleTriggersOfTheLittleBoldTagThingsInThePre(el, target) {
+    /**
+     * Get url things in da pre
+     */
 
-    el.addEventListener('mouseover', function() {
-        target.classList.add('highlight');
-    });
+    function handleTriggersOfTheLittleBoldTagThingsInThePre(el, target) {
 
-    el.addEventListener('mouseout', function() {
-        target.classList.remove('highlight');
-    });
+        el.addEventListener('mouseover', function () {
+            target.classList.add('highlight');
+        });
+
+        el.addEventListener('mouseout', function () {
+            target.classList.remove('highlight');
+        });
+    }
+
+    var triggers = document.querySelectorAll('b');
+
+    handleTriggersOfTheLittleBoldTagThingsInThePre(triggers[0], before);
+    handleTriggersOfTheLittleBoldTagThingsInThePre(triggers[1], after);
 }
-
-var triggers = document.querySelectorAll('b');
-
-handleTriggersOfTheLittleBoldTagThingsInThePre(triggers[0], before);
-handleTriggersOfTheLittleBoldTagThingsInThePre(triggers[1], after);
 
 
 
