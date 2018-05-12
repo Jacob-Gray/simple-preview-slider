@@ -1,0 +1,59 @@
+main {
+	max-width: 1200px;
+	margin: auto;
+	color: #333;
+	font-family: 'Raleway', sans-serif;
+	padding: 40px 20px;
+}
+
+iframe {
+	display: block;
+	border: none;
+	height: 300px;
+	width: 100%;
+}
+
+h2 {
+	color: #3c81ce;
+	padding: 20px 0;
+	font-size: 2em;
+	font-family: 'Playfair Display', serif;
+}
+
+pre {
+	background: #f6f6f6;
+	border-radius: 2px;
+	color: #cb35b4;
+	padding: 10px 20px;
+	word-wrap: break-word;
+	white-space: normal;
+	line-height: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: #3581cb;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+b {
+	background: #d146c1;
+	color: white;
+	padding: 3px 5px;
+	border-radius: 2px;
+	margin: 0 4px;
+}
+
+.resize {
+	overflow: hidden;
+	resize: both;
+	max-width: 100%;
+	max-height: 500px;
+}
+
+.resize iframe {
+	height: 100%;
+}

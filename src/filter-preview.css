@@ -1,13 +1,14 @@
 body, html {
 	margin: 0;
-	height: 100%;
+	height: 100%
 }
 
 .filter-preview {
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 	position: relative;
-	background: #222021;
+	background: #222021
 }
 
 .filter-preview .image-wrapper {
@@ -17,28 +18,45 @@ body, html {
 	height: 100%;
 	background: #333;
 	width: 50%;
+	z-index: 1;
 }
 
-.filter-preview, .filter-preview .image-wrapper {
+.filter-preview .image-wrapper .filter-image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-image: inherit;
+}
+
+.filter-preview .image-wrapper .filter-image:before {
+	content: '';
+	background-image: inherit;
+	display: block;
+	width: 100vw;
+	height: 100vh;
+}
+
+.filter-preview, .filter-preview .image-wrapper .filter-image:before {
 	background-position: center left;
-	background-size: cover;
+	background-size: cover
 }
 
 .filter-preview .image-wrapper .filter-slider {
 	position: absolute;
-	background: -webkit-gradient(linear, right top, left top, color-stop(40%, transparent), color-stop(41%, white), color-stop(59%, white), color-stop(60%, transparent));
-	background: -webkit-linear-gradient(right, transparent 40%, white 41%, white 59%, transparent 60%);
-	background: -o-linear-gradient(right, transparent 40%, white 41%, white 59%, transparent 60%);
-	background: linear-gradient(to left, transparent 40%, white 41%, white 59%, transparent 60%);
+	background: -webkit-gradient(linear, right top, left top, color-stop(40%, transparent), color-stop(41%, #fff), color-stop(59%, #fff), color-stop(60%, transparent));
+	background: -webkit-linear-gradient(right, transparent 40%, #fff 41%, #fff 59%, transparent 60%);
+	background: -o-linear-gradient(right, transparent 40%, #fff 41%, #fff 59%, transparent 60%);
+	background: linear-gradient(to left, transparent 40%, #fff 41%, #fff 59%, transparent 60%);
 	right: -10px;
 	top: 0;
 	width: 20px;
 	bottom: 0;
 	cursor: e-resize;
+	z-index: 1;
 }
 
-.filter-preview .image-wrapper .filter-slider:before,
-.filter-preview .image-wrapper .filter-slider:after {
+.filter-preview .image-wrapper .filter-slider:after, .filter-preview .image-wrapper .filter-slider:before {
 	content: '';
 	position: absolute;
 	border: 10px solid transparent;
@@ -46,14 +64,47 @@ body, html {
 	bottom: 0;
 	height: 0;
 	margin: auto;
+	transition: .3s;
 }
 
 .filter-preview .image-wrapper .filter-slider:before {
-	border-right-color: white;
-	right: 15px;
+	border-right-color: #fff;
+	right: 15px
 }
 
 .filter-preview .image-wrapper .filter-slider:after {
-	border-left-color: white;
-	right: -15px;
+	border-left-color: #fff;
+	right: -15px
+}
+
+.filter-preview .image-wrapper .filter-slider.grow-right:after, .filter-preview .image-wrapper .filter-slider.grow-left:before {
+	border-width: 15px;
+}
+
+.filter-preview .image-wrapper .filter-slider.grow-right:after {
+	right: -30px
+}
+
+.filter-preview .image-wrapper .filter-slider.grow-left:before {
+	right: 20px
+}
+
+.highlight:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	animation: highlight 1s infinite alternate;
+}
+
+@keyframes highlight {
+	from {
+		background: rgba(255, 230, 0, 0.1);
+	}
+
+	to {
+		background: rgba(255, 230, 0, 0.3);
+	}
 }

@@ -11,48 +11,88 @@
 	 * Initialize global vars
 	 */
 	var dragging = false,
-		startX;
+		direction,
+		prevX,
+		startingOffset = 0;
 
 	function w(el) {
 		return parseInt(getComputedStyle(el).width);
 	}
 
 	/**
-	 * Make sure the two element backgrounds overlap perfectly
-	 */
-	function positionWrapperBackground() {
-		$wrapper.style.backgroundSize = 'auto ' + w($el) + 'px';
-	}
-
-	window.addEventListener('resize', positionWrapperBackground);
-	positionWrapperBackground();
-
-	/**
 	 * Handle resize
 	 */
-	$el.addEventListener('mousemove', function (event) {
+	window.addEventListener('mousemove', function (event) {
 
 		if (dragging) {
 
 			var displayWidth = w($el),
-				newWidth = w($wrapper) - (startX - event.pageX);
+				travelled = prevX - event.pageX;
 
-			if (newWidth > 50 && displayWidth - newWidth > 50) {
-				$wrapper.style.width = newWidth + 'px';
-				startX = event.pageX;
+			if (prevX > event.pageX) {
 
+				if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
+				else startingOffset = 0;
+
+				direction = 'left';
+			} else if (prevX < event.pageX) {
+
+				if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
+				else startingOffset = 0;
+
+				direction = 'right';
 			}
+
+			var currentX = event.pageX + startingOffset;
+
+			if (currentX <= 2) {
+
+				$slider.classList.add('grow-right');
+				$wrapper.style.width = '2px';
+			} else if (displayWidth - currentX <= 2) {
+
+				$slider.classList.add('grow-left');
+				$wrapper.style.width = displayWidth - 2 + 'px';
+			} else {
+
+				$slider.className = 'filter-slider'
+
+				$wrapper.style.width = (currentX / displayWidth) * 100 + '%';
+			}
+
+			prevX = event.pageX;
 		}
 	});
 
 	$slider.addEventListener('mousedown', function (event) {
 
 		dragging = true;
-		startX = event.pageX;
+		startingOffset = w($wrapper) - event.pageX;
+		prevX = event.pageX;
 	});
 
 	window.addEventListener('mouseup', function () {
 
 		dragging = false;
+	});
+
+	document.addEventListener('mouseout', function (event) {
+
+		if (dragging && !event.toElement && !event.relatedTarget) {
+
+			var displayWidth = w($el);
+
+			if (direction === 'left') {
+
+				$slider.classList.add('grow-right');
+				$wrapper.style.width = '2px';
+			}
+
+			if (direction === 'right') {
+
+				$slider.classList.add('grow-left');
+				$wrapper.style.width = displayWidth - 2 + 'px';
+			}
+		}
 	});
 })();
