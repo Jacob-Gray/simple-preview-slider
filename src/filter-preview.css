@@ -86,3 +86,23 @@ body, html {
 .filter-preview .image-wrapper .filter-slider.grow-left:before {
 	right: 20px
 }
+
+.highlight:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	animation: highlight 1s infinite alternate;
+}
+
+@keyframes highlight {
+	from {
+		background: rgba(255, 230, 0, 0.4);
+	}
+
+	to {
+		background: rgba(255, 230, 0, 0.8);
+	}
+}

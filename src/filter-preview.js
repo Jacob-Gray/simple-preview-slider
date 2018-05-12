@@ -3,96 +3,96 @@
 	/**
 	 * Select elements
 	 */
-    var $el = document.querySelector('.filter-preview'),
-        $wrapper = $el.querySelector('.image-wrapper'),
-        $slider = $wrapper.querySelector('.filter-slider');
+	var $el = document.querySelector('.filter-preview'),
+		$wrapper = $el.querySelector('.image-wrapper'),
+		$slider = $wrapper.querySelector('.filter-slider');
 
 	/**
 	 * Initialize global vars
 	 */
-    var dragging = false,
-        direction,
-        prevX,
-        startingOffset = 0;
+	var dragging = false,
+		direction,
+		prevX,
+		startingOffset = 0;
 
-    function w(el) {
-        return parseInt(getComputedStyle(el).width);
-    }
+	function w(el) {
+		return parseInt(getComputedStyle(el).width);
+	}
 
 	/**
 	 * Handle resize
 	 */
-    window.addEventListener('mousemove', function (event) {
+	window.addEventListener('mousemove', function (event) {
 
-        if (dragging) {
+		if (dragging) {
 
-            var displayWidth = w($el),
-                travelled = prevX - event.pageX;
+			var displayWidth = w($el),
+				travelled = prevX - event.pageX;
 
-            if (prevX > event.pageX) {
+			if (prevX > event.pageX) {
 
-                if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
-                else startingOffset = 0;
+				if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
+				else startingOffset = 0;
 
-                direction = 'left';
-            } else if (prevX < event.pageX) {
+				direction = 'left';
+			} else if (prevX < event.pageX) {
 
-                if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
-                else startingOffset = 0;
+				if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
+				else startingOffset = 0;
 
-                direction = 'right';
-            }
+				direction = 'right';
+			}
 
-            var currentX = event.pageX + startingOffset;
+			var currentX = event.pageX + startingOffset;
 
-            if (currentX <= 2) {
+			if (currentX <= 2) {
 
-                $slider.classList.add('grow-right');
-                $wrapper.style.width = '2px';
-            } else if (displayWidth - currentX <= 2) {
+				$slider.classList.add('grow-right');
+				$wrapper.style.width = '2px';
+			} else if (displayWidth - currentX <= 2) {
 
-                $slider.classList.add('grow-left');
-                $wrapper.style.width = displayWidth - 2 + 'px';
-            } else {
+				$slider.classList.add('grow-left');
+				$wrapper.style.width = displayWidth - 2 + 'px';
+			} else {
 
-                $slider.className = 'filter-slider'
+				$slider.className = 'filter-slider'
 
-                $wrapper.style.width = (currentX / displayWidth) * 100 + '%';
-            }
+				$wrapper.style.width = (currentX / displayWidth) * 100 + '%';
+			}
 
-            prevX = event.pageX;
-        }
-    });
+			prevX = event.pageX;
+		}
+	});
 
-    $slider.addEventListener('mousedown', function (event) {
+	$slider.addEventListener('mousedown', function (event) {
 
-        dragging = true;
-        startingOffset = w($wrapper) - event.pageX;
-        prevX = event.pageX;
-    });
+		dragging = true;
+		startingOffset = w($wrapper) - event.pageX;
+		prevX = event.pageX;
+	});
 
-    window.addEventListener('mouseup', function () {
+	window.addEventListener('mouseup', function () {
 
-        dragging = false;
-    });
+		dragging = false;
+	});
 
-    document.addEventListener('mouseout', function (event) {
+	document.addEventListener('mouseout', function (event) {
 
-        if (dragging && !event.toElement && !event.relatedTarget) {
+		if (dragging && !event.toElement && !event.relatedTarget) {
 
-            var displayWidth = w($el);
+			var displayWidth = w($el);
 
-            if (direction === 'left') {
+			if (direction === 'left') {
 
-                $slider.classList.add('grow-right');
-                $wrapper.style.width = '2px';
-            }
+				$slider.classList.add('grow-right');
+				$wrapper.style.width = '2px';
+			}
 
-            if (direction === 'right') {
+			if (direction === 'right') {
 
-                $slider.classList.add('grow-left');
-                $wrapper.style.width = displayWidth - 2 + 'px';
-            }
-        }
-    });
+				$slider.classList.add('grow-left');
+				$wrapper.style.width = displayWidth - 2 + 'px';
+			}
+		}
+	});
 })();
