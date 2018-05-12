@@ -18,6 +18,7 @@ body, html {
 	height: 100%;
 	background: #333;
 	width: 50%;
+	z-index: 1;
 }
 
 .filter-preview .image-wrapper .filter-image {
@@ -51,7 +52,8 @@ body, html {
 	top: 0;
 	width: 20px;
 	bottom: 0;
-	cursor: e-resize
+	cursor: e-resize;
+	z-index: 1;
 }
 
 .filter-preview .image-wrapper .filter-slider:after, .filter-preview .image-wrapper .filter-slider:before {
@@ -99,10 +101,10 @@ body, html {
 
 @keyframes highlight {
 	from {
-		background: rgba(255, 230, 0, 0.4);
+		background: rgba(255, 230, 0, 0.1);
 	}
 
 	to {
-		background: rgba(255, 230, 0, 0.8);
+		background: rgba(255, 230, 0, 0.3);
 	}
 }
