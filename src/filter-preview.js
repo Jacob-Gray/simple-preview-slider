@@ -22,7 +22,7 @@
 	/**
 	 * Handle resize
 	 */
-	window.addEventListener('mousemove', function (event) {
+	function sliderMove (event) {
 
 		// Only process anything if the user is dragging the slider
 		if (dragging) {
@@ -77,9 +77,9 @@
 
 			prevX = event.pageX;
 		}
-	});
+	};
 
-	$slider.addEventListener('mousedown', function (event) {
+	function start (event) {
 
 		// Set dragging variable and style
 		dragging = true;
@@ -88,14 +88,14 @@
 		// Set intial position information
 		startingOffset = w($wrapper) - event.pageX;
 		prevX = event.pageX;
-	});
+	};
 
-	window.addEventListener('mouseup', function () {
+	function end () {
 
 		// Set dragging to false and remove dragging style
 		dragging = false;
 		$el.classList.remove('dragging');
-	});
+	};
 
 	// The purpose of checking this event is to provide as smooth a UX as possible, regardless of if the mouse moves out of the iframe and into area's we have no access to.
 	document.addEventListener('mouseout', function (event) {
@@ -117,4 +117,16 @@
 			}
 		}
 	});
+
+	/**
+	 * Attach mobile and desktop events
+	 */
+	window.addEventListener('mousemove', sliderMove);
+	window.addEventListener('touchmove', sliderMove);
+
+	$slider.addEventListener('mousedown', start);
+	$slider.addEventListener('touchstart', start);
+
+	window.addEventListener('mouseup', end);
+	window.addEventListener('touchend', end);
 })();
