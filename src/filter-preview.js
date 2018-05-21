@@ -24,16 +24,19 @@
 	 */
 	function sliderMove (event) {
 
+		event.preventDefault();
+
 		// Only process anything if the user is dragging the slider
 		if (dragging) {
 
 			var displayWidth = w($el),
 				wrapperWidth = w($wrapper),
-				travelled = prevX - event.pageX;
+				x = event.targetTouches ? event.targetTouches[0].pageX : event.pageX,
+				travelled = prevX - x;
 
 			// Check the direction of the drag by comparing the previous and current positions
 			// The main purpose of this code is to provide a smooth transition so the slider is centered on the cursor, without a sudden jump
-			if (prevX > event.pageX) {
+			if (prevX > x) {
 
 				// Note that here the starting offset and travelled are negative
 				// If we have a < 0 starting offset, and the starting offset is less than the traveled distance, we just subtract the travelled difference from the offset
@@ -44,7 +47,7 @@
 				else if (travelled > startingOffset) startingOffset = 0;
 
 				direction = 'left';
-			} else if (prevX < event.pageX) {
+			} else if (prevX < x) {
 
 				// Same as above except reversed and the starting offset and travelled are positive
 				if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
@@ -54,7 +57,7 @@
 			}
 
 			// Calculate the current width for the image wrapper
-			var currentX = event.pageX + startingOffset;
+			var currentX = x + startingOffset;
 
 			// Check if the user is within a margin of the windows edge.
 			// This allows us to add the appropriate styles when a image is covering the whole display.
@@ -75,7 +78,7 @@
 				$wrapper.style.width = (currentX / displayWidth) * 100 + '%';
 			}
 
-			prevX = event.pageX;
+			prevX = x;
 		}
 	};
 
@@ -86,8 +89,9 @@
 		$el.classList.add('dragging');
 
 		// Set intial position information
-		startingOffset = w($wrapper) - event.pageX;
-		prevX = event.pageX;
+		var x = event.targetTouches ? event.targetTouches[0].pageX : event.pageX;
+		startingOffset = w($wrapper) - x;
+		prevX = x;
 	};
 
 	function end () {
