@@ -24,8 +24,6 @@
 	 */
 	function sliderMove (event) {
 
-		event.preventDefault();
-
 		// Only process anything if the user is dragging the slider
 		if (dragging) {
 
