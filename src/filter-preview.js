@@ -34,24 +34,28 @@
 
 			// Check the direction of the drag by comparing the previous and current positions
 			// The main purpose of this code is to provide a smooth transition so the slider is centered on the cursor, without a sudden jump
-			if (prevX > x) {
+			// We don't want this to run on mobile, there is no need
+			if(!event.targetTouches){
 
-				// Note that here the starting offset and travelled are negative
-				// If we have a < 0 starting offset, and the starting offset is less than the traveled distance, we just subtract the travelled difference from the offset
-				if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
+				if (prevX > x) {
 
-				// Otherwise, if the travelled distance is more than the starting offset, meaning the cursor has passed over(or is currently over) the center point,
-				// we remove the offset.
-				else if (travelled > startingOffset) startingOffset = 0;
+					// Note that here the starting offset and travelled are negative
+					// If we have a < 0 starting offset, and the starting offset is less than the traveled distance, we just subtract the travelled difference from the offset
+					if (startingOffset < 0 && startingOffset < travelled) startingOffset = startingOffset + travelled;
 
-				direction = 'left';
-			} else if (prevX < x) {
+					// Otherwise, if the travelled distance is more than the starting offset, meaning the cursor has passed over(or is currently over) the center point,
+					// we remove the offset.
+					else if (travelled > startingOffset) startingOffset = 0;
 
-				// Same as above except reversed and the starting offset and travelled are positive
-				if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
-				else if (travelled < startingOffset) startingOffset = 0;
+					direction = 'left';
+				} else if (prevX < x) {
 
-				direction = 'right';
+					// Same as above except reversed and the starting offset and travelled are positive
+					if (startingOffset > 0 && startingOffset > travelled) startingOffset = startingOffset + travelled;
+					else if (travelled < startingOffset) startingOffset = 0;
+
+					direction = 'right';
+				}
 			}
 
 			// Calculate the current width for the image wrapper
